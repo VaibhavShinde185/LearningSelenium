@@ -1,72 +1,48 @@
 package com.thetestingacademy.ex_selenium;
 
 
-import io.qameta.allure.Description;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+import java.io.ByteArrayOutputStream;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class practiceLab001 {
-    WebDriver driver;
-
-    @BeforeTest
-    public void openBrowser(){
-        ChromeOptions options = new ChromeOptions();
-        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        options.addArguments("guest");
-        driver = new ChromeDriver(options);
-    }
 
     @Test
-    @Description("IFrame")
-    public void webTables() throws InterruptedException {
+    public void test01() throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        String URL = "https://app.vwo.com/#/test/ab/13/heatmaps/1?token=eyJhY2NvdW50X2lkIjo2NjY0MDAsImV4cGVyaW1lbnRfaWQiOjEzLCJjcmVhdGVkX29uIjoxNjcxMjA1MDUwLCJ0eXBlIjoiY2FtcGFpZ24iLCJ2ZXJzaW9uIjoxLCJoYXNoIjoiY2IwNzBiYTc5MDM1MDI2N2QxNTM5MTBhZDE1MGU1YTUiLCJzY29wZSI6IiIsImZybiI6ZmFsc2V9&isHttpsOnly=1";
-        driver.get(URL);
-        Actions action = new Actions(driver);
-        Thread.sleep(5000);
+        driver.navigate().to("https://www.ebay.com/b/Desktops-All-In-One-Computers/171957/bn_1643067");
 
-        String parentWindowHandle = driver.getWindowHandle();
-        System.out.println("Parent Window is: " + parentWindowHandle);
+        driver.findElement(By.xpath("//input[@id='gh-ac']")).sendKeys("macmini");
+        driver.findElement(By.xpath("//span[@class='gh-search-button__label']")).click();
 
-        List<WebElement> listHeatmaps = driver.findElements(By.xpath("//img[@data-qa='danawobuqa']"));
-        action.moveToElement(listHeatmaps.get(1)).click().build().perform();
+        Thread.sleep(10000);
 
-        Thread.sleep(15000);
+//        List<WebElement> serachTitles = driver.findElements(By.xpath("//div[@class='s-item__title'/span]"));
+//        List<WebElement> serachTitlesPrices = driver.findElements(By.xpath("//span[@class='s-item__price']"));
 
-        Set<String> allhandles = driver.getWindowHandles();
-        System.out.println(allhandles);
+        List<WebElement> searchTitles = driver.findElements(By.xpath("//h3[@class='s-item__title']"));
+        List<WebElement> searchPrices = driver.findElements(By.xpath("//span[@class='s-item__price']"));
 
-        for(String handle : allhandles){
-            if (!handle.equals(parentWindowHandle)){
-                driver.switchTo().window(handle);
-                driver.switchTo().frame("heatmap-iframe");
 
-                WebElement clickMap = driver.findElement(By.xpath("//div[@data-qa='liqokuxuba']"));
-                clickMap.click();
-            }
+        int size = Math.min(searchTitles.size(), searchPrices.size());
+
+        for (int i = 0; i < size; i++) {
+            System.out.println("Title: " + searchTitles.get(i).getText().trim() + " || Price: " + searchPrices.get(i).getText().trim());
+            System.out.println();
         }
 
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-    }
-
-    @AfterTest
-    public void closeBrowser(){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.quit();
     }
 }
