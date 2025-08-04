@@ -1,4 +1,4 @@
-package com.thetestingacademy.ex_selenium.seleniumBasicsDay1.Project01;
+package com.thetestingacademy.ex_selenium.navigationCommandsCloseQuitOptions.Project01;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;

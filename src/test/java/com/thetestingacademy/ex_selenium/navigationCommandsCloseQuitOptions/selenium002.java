@@ -1,4 +1,4 @@
-package com.thetestingacademy.ex_selenium.seleniumBasicsDay1;
+package com.thetestingacademy.ex_selenium.navigationCommandsCloseQuitOptions;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 

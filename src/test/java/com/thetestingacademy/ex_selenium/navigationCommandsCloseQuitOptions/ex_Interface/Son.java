@@ -1,4 +1,4 @@
-package com.thetestingacademy.ex_selenium.seleniumBasicsDay1.ex_Interface;
+package com.thetestingacademy.ex_selenium.navigationCommandsCloseQuitOptions.ex_Interface;
 
 public class Son implements Father{
 
