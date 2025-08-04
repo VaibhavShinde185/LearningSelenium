@@ -1,4 +1,4 @@
-package com.thetestingacademy.ex_selenium.seleniumBasicsDay3;
+package com.thetestingacademy.ex_selenium.xpathXPathAxesDay3;
 
 public class selenium021 {
 
