@@ -1,4 +1,4 @@
-package com.thetestingacademy.ex_selenium.seleniumBasicsDay2;
+package com.thetestingacademy.ex_selenium.byLocatorWebElementDay2;
 
 import io.qameta.allure.Description;
 import org.openqa.selenium.By;

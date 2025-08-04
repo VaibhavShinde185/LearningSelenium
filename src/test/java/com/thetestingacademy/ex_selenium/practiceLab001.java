@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import static org.apache.commons.lang3.StringUtils.contains;
+
 public class practiceLab001 {
 
 
@@ -24,18 +26,46 @@ public class practiceLab001 {
     public void testWebTable() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--inprivate");
+        chromeOptions.addArguments("--window-size=800,600");
+
         WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.navigate().to("https://codepen.io/AbdullahSajjad/full/LYGVRgK");
+        driver.navigate().to("https://app.vwo.com/#/login");
         driver.manage().window().maximize();
-        Thread.sleep(15000);
+        System.out.println(driver.getCurrentUrl());
+        System.out.println(driver.getTitle());
 
-        driver.switchTo().frame("result");
+        if (driver.getPageSource().contains("Sign in to VWO platform")){
+            System.out.println("Verified");
+            Assert.assertTrue(true);
+        } else {
+            Assert.assertFalse(false);
+        }
 
-        WebElement submit = driver.findElement(By.xpath("//form[@id=\"form\"]/button"));
-        submit.click();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://app.vwo.com/#/login");
 
-        WebElement userName = driver.findElement(By.xpath("//input[@id=\"username\"]"));
+
+        WebElement userName = driver.findElement(By.id("login-username"));
+        userName.sendKeys("admin@admin.com");
+
+        WebElement password = driver.findElement(By.id("login-password"));
+        password.sendKeys("P@ssw0rd369");
+
+        WebElement signInButton = driver.findElement(By.id("js-login-btn"));
+        signInButton.click();
+
+        WebElement errorMessage = driver.findElement(By.id("js-notification-box-msg"));
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+        wait.until(ExpectedConditions.textToBePresentInElement
+                (errorMessage, "Your email, password, IP address or location did not match"));
+
+        Assert.assertEquals(errorMessage.getText(),
+                "Your email, password, IP address or location did not match");
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
+
+        WebElement freeTrial = driver.findElement(By.partialLinkText("free trail"));
+        freeTrial.click();
 
 
         }

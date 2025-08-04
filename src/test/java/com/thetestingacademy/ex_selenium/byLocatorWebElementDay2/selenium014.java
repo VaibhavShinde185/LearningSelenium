@@ -1,10 +1,8 @@
-package com.thetestingacademy.ex_selenium.seleniumBasicsDay2;
+package com.thetestingacademy.ex_selenium.byLocatorWebElementDay2;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
-
-import java.net.URL;
 
 public class selenium014 {
     public static void main(String[] args) {

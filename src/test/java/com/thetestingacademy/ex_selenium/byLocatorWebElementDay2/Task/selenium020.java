@@ -1,4 +1,4 @@
-package com.thetestingacademy.ex_selenium.seleniumBasicsDay2.Task;
+package com.thetestingacademy.ex_selenium.byLocatorWebElementDay2.Task;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -1,14 +1,9 @@
-package com.thetestingacademy.ex_selenium.seleniumBasicsDay2.Task;
+package com.thetestingacademy.ex_selenium.byLocatorWebElementDay2.Task;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class selenium019 {
 
