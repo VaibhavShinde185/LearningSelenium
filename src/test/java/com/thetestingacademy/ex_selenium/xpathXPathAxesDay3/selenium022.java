@@ -39,7 +39,7 @@ public class selenium022 {
             throw new RuntimeException(e);
         }
 
-        WebElement errorMessage = driver.findElement(By.xpath("//h5[@class='id-card-title' and contains(text(), 'Your free trial has expired')]"));
+        WebElement errorMessage = driver.findElement(By.xpath("//h5[contains(text(), 'free trial')]"));
         Assert.assertEquals(errorMessage.getText(), "Your free trial has expired");
 
         try {
